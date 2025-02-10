@@ -181,3 +181,33 @@ section.active-section {
 .link-item a:hover {
     text-decoration: underline;
 }
+
+/* 添加 section 的基本样式 */
+main section {
+    display: none;
+    padding: 20px;
+    margin: 20px;
+}
+
+/* 活动 section 的样式 */
+main section.active-section {
+    display: block;
+}
+
+/* 活动链接的样式 */
+nav a.active {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+/* 确保内容区域有合适的样式 */
+.content {
+    margin: 20px 0;
+    line-height: 1.6;
+}
+
+/* 确保 section 标题样式正确 */
+section h2 {
+    margin-bottom: 20px;
+    color: #333;
+}

@@ -106,3 +106,35 @@ document.addEventListener('DOMContentLoaded', function() {
         firstSection.classList.add('active-section');
     }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    // 获取所有导航链接
+    const navLinks = document.querySelectorAll('nav a');
+    
+    // 为每个链接添加点击事件
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault(); // 阻止默认跳转
+            
+            // 获取目标section的id
+            const targetId = this.getAttribute('href').substring(1);
+            
+            // 隐藏所有section
+            document.querySelectorAll('main section').forEach(section => {
+                section.classList.remove('active-section');
+            });
+            
+            // 显示目标section
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                targetSection.classList.add('active-section');
+            }
+            
+            // 更新活动链接样式
+            navLinks.forEach(navLink => {
+                navLink.classList.remove('active');
+            });
+            this.classList.add('active');
+        });
+    });
+});
