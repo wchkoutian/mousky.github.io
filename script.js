@@ -4,10 +4,25 @@
 document.querySelectorAll('nav a').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
-        const section = document.querySelector(this.getAttribute('href'));
-        section.scrollIntoView({
-            behavior: 'smooth'
+        
+        // 移除所有active类
+        document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+        // 添加active类到当前点击的链接
+        this.classList.add('active');
+
+        // 隐藏所有section
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.remove('active-section');
         });
+
+        // 显示目标section
+        const targetSection = document.querySelector(this.getAttribute('href'));
+        if (targetSection) {
+            targetSection.classList.add('active-section');
+            targetSection.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
     });
 });
 
@@ -36,4 +51,58 @@ document.addEventListener('DOMContentLoaded', function() {
         section.style.transform = 'translateY(20px)';
         section.style.transition = 'all 0.5s ease-in-out';
     });
+});
+
+// 搜索快捷键
+document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        document.querySelector('.search-bar input').focus();
+    }
+});
+
+// 页面滚动时的动画效果
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in');
+        }
+    });
+}, {
+    threshold: 0.1
+});
+
+document.querySelectorAll('section').forEach(section => {
+    section.classList.add('fade-out');
+    observer.observe(section);
+});
+
+// 初始化active状态
+function updateActiveLink() {
+    const sections = document.querySelectorAll('section');
+    let currentSection = '';
+
+    sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 150 && rect.bottom >= 150) {
+            currentSection = '#' + section.id;
+        }
+    });
+
+    document.querySelectorAll('nav a').forEach(a => {
+        a.classList.remove('active');
+        if (a.getAttribute('href') === currentSection) {
+            a.classList.add('active');
+        }
+    });
+}
+
+window.addEventListener('scroll', updateActiveLink);
+
+// 初始化：确保第一个section可见
+document.addEventListener('DOMContentLoaded', function() {
+    const firstSection = document.querySelector('section');
+    if (firstSection) {
+        firstSection.classList.add('active-section');
+    }
 });
