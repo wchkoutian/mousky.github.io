@@ -148,10 +148,14 @@ section {
     border-radius: 8px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     margin-bottom: 30px;
+    opacity: 1;
+    transform: none;
 }
 
 section.active-section {
-    display: block;
+    display: block !important;
+    opacity: 1 !important;
+    transform: none !important;
 }
 
 .content p {
@@ -182,24 +186,6 @@ section.active-section {
     text-decoration: underline;
 }
 
-/* 添加 section 的基本样式 */
-main section {
-    display: none;
-    padding: 20px;
-    margin: 20px;
-}
-
-/* 活动 section 的样式 */
-main section.active-section {
-    display: block;
-}
-
-/* 活动链接的样式 */
-nav a.active {
-    background-color: #f0f0f0;
-    color: #333;
-}
-
 /* 确保内容区域有合适的样式 */
 .content {
     margin: 20px 0;
@@ -210,4 +196,146 @@ nav a.active {
 section h2 {
     margin-bottom: 20px;
     color: #333;
+}
+
+/* 更新导航按钮样式 */
+.page-navigation {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.nav-button {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+    min-width: 150px;
+}
+
+.nav-button:hover {
+    background-color: #f8f9fa;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.nav-button.prev {
+    flex-direction: row;
+}
+
+.nav-button.next {
+    flex-direction: row-reverse;
+    margin-left: auto;
+}
+
+.nav-button .nav-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-direction {
+    font-size: 0.85em;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.nav-title {
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+/* 添加箭头图标 */
+.nav-button.prev::before {
+    content: "←";
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+.nav-button.next::after {
+    content: "→";
+    margin-left: 10px;
+    font-size: 1.2em;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .nav-buttons {
+        flex-direction: column;
+    }
+    
+    .nav-button {
+        width: 100%;
+    }
+}
+
+/* 添加复盘日记相关样式 */
+.diary-entry {
+    background: #fff;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.diary-entry h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.diary-entry .summary {
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.highlights, .lessons, .strategy {
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 6px;
+    background: #f8f9fa;
+}
+
+.highlights h4, .lessons h4, .strategy h4 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.highlights {
+    border-left: 4px solid #2ecc71;
+}
+
+.lessons {
+    border-left: 4px solid #e74c3c;
+}
+
+.strategy {
+    border-left: 4px solid #3498db;
+}
+
+.diary-entry ol {
+    padding-left: 20px;
+    margin: 10px 0;
+}
+
+.diary-entry li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+.diary-entry strong {
+    color: #e74c3c;
 }
